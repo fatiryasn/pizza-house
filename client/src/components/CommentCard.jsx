@@ -14,7 +14,7 @@ const CommentCard = ({ data }) => {
 
   const handleDelete = () => {
     axios
-      .delete(`http://localhost:8080/api/comment/${data._id}`)
+      .delete(`https://pizza-house-eight.vercel.app/api/comment/${data._id}`)
       .then((res) => {
         console.log(res);
         localStorage.removeItem("name");
