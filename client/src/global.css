@@ -1,0 +1,21 @@
+.pizzabg{
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.6)), url('./assets/heropizza.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.splashbg{
+    background: url('./assets/splash.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+}
+.bg-2{
+    background:  url('./assets/bg-2.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bg-shade{
+    background-color: rgba(0, 0, 0, 0.6);
+}
