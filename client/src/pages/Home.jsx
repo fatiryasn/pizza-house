@@ -158,7 +158,7 @@ const Home = () => {
 
         <div className="flex flex-col md:flex-row items-center md:justify-around w-full min-h-[110vh] lg:min-h-[80vh] bg-2 text-white pt-5 md:px-32 ">
           {token ? (
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col items-center justify-center min-h-[26rem] gap-2">
               <FontAwesomeIcon
                 icon={faCheckCircle}
                 className="text-[2rem] text-green-500"
