@@ -18,8 +18,10 @@ import {
   faComments,
 } from "@fortawesome/free-solid-svg-icons";
 import CommentCard from "../components/CommentCard";
+import Loader from "../components/Loader";
 
 const Home = () => {
+  const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [comments, setComments] = useState([]);
   const [name, setName] = useState("");
@@ -29,8 +31,9 @@ const Home = () => {
   const token = localStorage.getItem("name");
 
   useEffect(() => {
+    setLoading(true);
     axios
-      .get("http://localhost:8080/api/product")
+      .get("https://pizza-house-eight.vercel.app/api/product")
       .then((res) => {
         const allProducts = res.data.data;
 
@@ -46,22 +49,27 @@ const Home = () => {
 
         const favorites = [...pizza, ...beverage, ...others];
         setProducts(favorites);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   }, []);
 
   const getComments = () => {
+    setLoading(true);
     axios
-      .get("http://localhost:8080/api/comment")
+      .get("https://pizza-house-eight.vercel.app/api/comment")
       .then((res) => {
         setComments(res.data.data);
         setCommentLen(res.data.totalData);
         console.log(res.data.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   };
   useEffect(() => {
@@ -69,11 +77,14 @@ const Home = () => {
   }, []);
 
   const handleComment = () => {
-    if(!name || !comment){
-      enqueueSnackbar("Request is incomplete")
+    if (!name || !comment) {
+      enqueueSnackbar("Request is incomplete");
     }
     axios
-      .post("http://localhost:8080/api/comment", { name, comment })
+      .post("https://pizza-house-eight.vercel.app/api/comment", {
+        name,
+        comment,
+      })
       .then((res) => {
         console.log(res.data);
         enqueueSnackbar("Feedback terkirim!", { variant: "success" });
@@ -125,11 +136,15 @@ const Home = () => {
         <h1 className="font-bold text-2xl lg:text-3xl font-poppins">
           Favorites
         </h1>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 place-content-center place-items-center gap-5 lg:gap-7">
-          {products.map((product) => (
-            <ProductCard1 key={product._id} data={product} />
-          ))}
-        </div>
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 place-content-center place-items-center gap-5 lg:gap-7">
+            {products.map((product) => (
+              <ProductCard1 key={product._id} data={product} />
+            ))}
+          </div>
+        )}
         <button className="px-4 py-2 bg-green-900 text-white font-semibold rounded-lg hover:bg-green-950">
           <a href="/menu">Lihat lebih banyak</a>
         </button>
@@ -196,12 +211,18 @@ const Home = () => {
               </button>
             </div>
           )}
-          <div className="flex flex-col items-center mb-10 mt-20 pr-4 gap-5 max-h-[30rem] overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-400">
-            <span className="font-poppins self-start">{commentLen} Komentar</span>
-            {comments.map((comment) => (
-              <CommentCard key={comment._id} data={comment} />
-            ))}
-          </div>
+          {loading ? (
+            <Loader />
+          ) : (
+            <div className="flex flex-col items-center mb-10 mt-20 pr-4 gap-5 max-h-[30rem] overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-400">
+              <span className="font-poppins self-start">
+                {commentLen} Komentar
+              </span>
+              {comments.map((comment) => (
+                <CommentCard key={comment._id} data={comment} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

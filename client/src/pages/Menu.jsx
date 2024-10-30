@@ -4,15 +4,18 @@ import axios from "axios";
 import logo from "../assets/logo.png";
 import halal from "../assets/halal.png";
 import ProductCard2 from "../components/ProductCard2";
+import Loader from "../components/Loader";
 
 const Menu = () => {
+  const [loading, setLoading] = useState(false);
   const [pizzas, setPizzas] = useState([]);
   const [beverages, setBeverages] = useState([]);
   const [others, setOthers] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     axios
-      .get("http://localhost:8080/api/product")
+      .get("https://pizza-house-eight.vercel.app/api/product")
       .then((res) => {
         const allProducts = res.data.data;
         const pizza = allProducts.filter((p) => p.category === "pizza");
@@ -23,9 +26,11 @@ const Menu = () => {
 
         const other = allProducts.filter((p) => p.category === "others");
         setOthers(other);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(true);
       });
   }, []);
   return (
@@ -44,23 +49,35 @@ const Menu = () => {
       </div>
       <div className="flex flex-col items-center lg:items-stretch mt-32 lg:px-10">
         <h2 className="text-2xl font-bold font-playwrite">🍕Pizza</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 place-content-center place-items-center gap-10 pt-10">
-          {pizzas.map((pizza) => (
-            <ProductCard2 key={pizza._id} data={pizza} />
-          ))}
-        </div>
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 place-content-center place-items-center gap-10 pt-10">
+            {pizzas.map((pizza) => (
+              <ProductCard2 key={pizza._id} data={pizza} />
+            ))}
+          </div>
+        )}
         <h2 className="text-2xl font-bold mt-40 font-playwrite">🍺Beverage</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 place-content-center place-items-center gap-10 pt-10">
-          {beverages.map((beverage) => (
-            <ProductCard2 key={beverage._id} data={beverage} />
-          ))}
-        </div>
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 place-content-center place-items-center gap-10 pt-10">
+            {beverages.map((beverage) => (
+              <ProductCard2 key={beverage._id} data={beverage} />
+            ))}
+          </div>
+        )}
         <h2 className="text-2xl font-bold mt-40 font-playwrite">Others</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 place-content-center place-items-center gap-10 pt-10">
-          {others.map((other) => (
-            <ProductCard2 key={other._id} data={other} />
-          ))}
-        </div>
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 place-content-center place-items-center gap-10 pt-10">
+            {others.map((other) => (
+              <ProductCard2 key={other._id} data={other} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
