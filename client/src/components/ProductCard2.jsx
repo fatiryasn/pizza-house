@@ -8,7 +8,7 @@ const ProductCard2 = ({ data }) => {
   };
 
   return (
-    <div className="flex items-center gap-3 lg:gap-7 px-3 py-1 lg:px-5 lg:py-2 rounded-xl border-2 w-[24rem] lg:w-[38rem]">
+    <div className="flex items-center gap-3 lg:gap-7 px-3 py-1 lg:px-5 lg:py-2 rounded-xl border-2 w-[22rem] lg:w-[38rem]">
       <div
         className="flex-shrink-0 h-28 w-28 lg:h-36 lg:w-36 rounded-lg bg-gray-200"
         style={{

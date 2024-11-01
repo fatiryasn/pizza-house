@@ -16,7 +16,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="px-3 md:px-32 py-3 md:py-0 z-50 fixed flex justify-between items-center w-full shadow-md   border-b bg-white">
+      <div className="px-5 md:px-32 py-3 md:py-0 z-50 fixed flex justify-between items-center w-full shadow-md   border-b bg-white">
         <div className="gap-1 lg:gap-3 flex items-center">
           <img src={logo} alt="Logo Pizza" className="h-6 md:h-12" />
           <span className="font-playwrite font-bold text-xs md:text-base">
