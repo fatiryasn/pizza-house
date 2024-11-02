@@ -80,6 +80,7 @@ const Home = () => {
     if (!name || !comment) {
       enqueueSnackbar("Request is incomplete");
     }
+    setLoading(true);
     axios
       .post("https://pizza-house-eight.vercel.app/api/comment", {
         name,
@@ -87,14 +88,19 @@ const Home = () => {
       })
       .then((res) => {
         console.log(res.data);
-        enqueueSnackbar("Feedback terkirim!", { variant: "success" });
         localStorage.setItem("name", name);
         getComments();
         setComment("");
         setName("");
+        enqueueSnackbar("Feedback terkirim!", { variant: "success" });
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        getComments();
+        setComment("");
+        setName("");
+        enqueueSnackbar(err.response.data.message, { variant: "error" });
       });
   };
 
@@ -211,18 +217,20 @@ const Home = () => {
               </button>
             </div>
           )}
-          {loading ? (
-            <Loader />
-          ) : (
-            <div className="flex flex-col items-center mb-10 mt-20 pr-4 gap-5 max-h-[30rem] overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-400">
-              <span className="font-poppins self-start">
-                {commentLen} Komentar
-              </span>
-              {comments.map((comment) => (
-                <CommentCard key={comment._id} data={comment} />
-              ))}
-            </div>
-          )}
+          <div className="flex flex-col items-center mb-10 mt-20 pr-4 gap-5 max-h-[30rem] overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-400">
+            {loading ? (
+              <Loader />
+            ) : (
+              <>
+                <span className="font-poppins self-start">
+                  {commentLen} Komentar
+                </span>
+                {comments.map((comment) => (
+                  <CommentCard key={comment._id} data={comment} />
+                ))}
+              </>
+            )}
+          </div>
         </div>
       </div>
 
