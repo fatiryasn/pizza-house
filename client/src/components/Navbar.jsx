@@ -76,23 +76,25 @@ const Navbar = () => {
           )}
         </div>
       </div>
-      {visible ? (
-        <div className="fixed top-0 w-full h-full bg-shade flex justify-center items-center z-50">
-          <div className="fixed border-black border-2 border-t-4 rounded-xl w-64 shadow-2xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 px-10 pt-5 pb-10 bg-gradient-to-br from-green-200 to-white">
-            <div className="flex flex-col">
-              <FontAwesomeIcon
-                icon={faXmark}
-                className="h-5 self-end cursor-pointer"
-                onClick={() => setVisible(false)}
-              />
-              <h1 className="font-bold text-2xl font-poppins">Maaf</h1>
-              <p className="font-quicksand">Nomor WhatsApp belum tersedia</p>
-            </div>
+
+      <div
+        className={`${visible ? "ani-appear flex" : "ani-dissappear hidden"} fixed top-0 w-full h-full bg-shade justify-center items-center z-50 `}
+      >
+        <div
+          className={`fixed border-black border-2 border-t-4 rounded-xl w-64 shadow-2xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 px-10 pt-5 pb-10 bg-gradient-to-br from-green-200 to-white`}
+        >
+          <div className="flex flex-col">
+            <FontAwesomeIcon
+              icon={faXmark}
+              className="h-5 self-end text-slate-800 cursor-pointer hover:scale-150 hover:text-black transition"
+              onClick={() => setVisible(false)}
+            />
+            <h1 className="font-bold text-2xl font-poppins">Maaf</h1>
+            <p className="font-quicksand">Nomor WhatsApp belum tersedia</p>
           </div>
         </div>
-      ) : (
-        ""
-      )}
+      </div>
+
       <div
         className={`fixed z-40 top-12 bottom-0 right-0 left-1/2 bg-green-950 flex flex-col transform transition-transform duration-300 ${
           sidebar ? "translate-x-0" : "translate-x-full"

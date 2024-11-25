@@ -18,4 +18,28 @@
 }
 .bg-shade{
     background-color: rgba(0, 0, 0, 0.6);
+    transition: all;
+}
+
+.ani-appear {
+    animation: appearance 0.3s ease-in;
+}
+.ani-dissapear{
+    animation: disappearance 0.3s ease-out;
+}
+
+@keyframes appearance {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes dissapearance{
+    0%{
+        opacity: 1;
+    }100%{
+        opacity: 0;
+    }
 }
