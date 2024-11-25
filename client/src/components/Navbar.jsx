@@ -93,55 +93,55 @@ const Navbar = () => {
       ) : (
         ""
       )}
-      {sidebar ? (
-        <div className="fixed z-40 top-12 bottom-0 right-0 left-1/2 bg-green-950 flex flex-col">
-          <div className="flex flex-col justify-between p-5 mt-16  h-full ">
-            <div className="flex flex-col gap-10">
-              <a
-                href="/"
-                className={`${
-                  checkPath("/")
-                    ? "text-green-200 font-bold border-solid border-slate-900 w-fit"
-                    : "text-white  border-transparent"
-                } border-b-2 `}
-              >
-                Home
-              </a>
-              <a
-                href="/menu"
-                className={`${
-                  checkPath("/menu")
-                    ? "text-green-200 font-bold border-solid border-slate-900 w-fit"
-                    : "text-white  border-transparent"
-                } border-b-2 `}
-              >
-                Menu
-              </a>
-              <a
-                href="/about"
-                className={`${
-                  checkPath("/about")
-                    ? "text-green-200 font-bold border-solid border-slate-900 w-fit"
-                    : "text-white  border-transparent"
-                } border-b-2 `}
-              >
-                About Us
-              </a>
-            </div>
-            <div>
-              <button
-                onClick={() => setVisible(true)}
-                className="px-5 py-2 self-end text-white bg-green-800 rounded-lg border hover:bg-green-900 text-center"
-              >
-                Order Now{" "}
-                <FontAwesomeIcon icon={faWhatsapp} className="pl-2 h-5" />
-              </button>
-            </div>
+      <div
+        className={`fixed z-40 top-12 bottom-0 right-0 left-1/2 bg-green-950 flex flex-col transform transition-transform duration-300 ${
+          sidebar ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex flex-col justify-between p-5 mt-16 h-full">
+          <div className="flex flex-col gap-10">
+            <a
+              href="/"
+              className={`${
+                checkPath("/")
+                  ? "text-green-200 font-bold border-solid border-white  w-fit"
+                  : "text-white  border-transparent"
+              } border-b-2 `}
+            >
+              Home
+            </a>
+            <a
+              href="/menu"
+              className={`${
+                checkPath("/menu")
+                  ? "text-green-200 font-bold border-solid border-slate-900 w-fit"
+                  : "text-white  border-transparent"
+              } border-b-2 `}
+            >
+              Menu
+            </a>
+            <a
+              href="/about"
+              className={`${
+                checkPath("/about")
+                  ? "text-green-200 font-bold border-solid border-slate-900 w-fit"
+                  : "text-white  border-transparent"
+              } border-b-2 `}
+            >
+              About Us
+            </a>
+          </div>
+          <div>
+            <button
+              onClick={() => setVisible(true)}
+              className="px-5 py-2 self-end text-white bg-green-800 rounded-lg border hover:bg-green-900 text-center"
+            >
+              Order Now{" "}
+              <FontAwesomeIcon icon={faWhatsapp} className="pl-2 h-5" />
+            </button>
           </div>
         </div>
-      ) : (
-        ""
-      )}
+      </div>
     </>
   );
 };
